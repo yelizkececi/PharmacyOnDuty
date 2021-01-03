@@ -9,7 +9,7 @@ import Foundation
 
 struct Constants {
     struct URLs {
-        static let allPharmacyOnDuty = "https://api.kodlama.net/eczane/il/52"
+        static let allPharmacyOnDuty = "https://api.kodlama.net/eczane/all"
     }
     
 }

@@ -12,12 +12,11 @@ class PharmacyTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var phoneButton: UIButton!
     
     func configure(for vm: PharmacyViewModel) {
         self.titleLabel.text = vm.title
         self.addressLabel.text = vm.address
-        self.phoneLabel.text = String(vm.phone)
-    }
+        self.phoneButton.setTitle(vm.phone, for: .normal )    }
     
 }

@@ -12,12 +12,12 @@ struct PharmacyList: Decodable {
 }
 
 struct Pharmacy: Decodable {
-    let eczane_adi: String
-    let eczane_ilce: String
-    let eczane_adres: String
-    let eczane_telefon: String
+    let eczaneAdi: String
+    let eczaneIlce: String
+    let eczaneAdres: String
+    let eczaneTelefon: String
     
     private enum CodingKeys : String, CodingKey {
-        case eczane_adi = "eczane_adi", eczane_ilce = "eczane_ilce", eczane_adres = "eczane_adres" , eczane_telefon = "eczane_telefon"
+        case eczaneAdi = "eczane_adi", eczaneIlce = "eczane_ilce", eczaneAdres = "eczane_adres" , eczaneTelefon = "eczane_telefon"
     }
 }

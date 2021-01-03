@@ -22,12 +22,12 @@ extension PharmacyListViewModel{
     }
     
     func pharmacyAtIndex(_ index: Int) -> Pharmacy {
-        let pharmacyTitle = data[index].eczane_adi
-        let pharmacyAddress = data[index].eczane_adres
-        let pharmacyCity = data[index].eczane_ilce
-        let pharmacyPhone = data[index].eczane_telefon
+        let pharmacyTitle = data[index].eczaneAdi
+        let pharmacyAddress = data[index].eczaneAdres
+        let pharmacyCity = data[index].eczaneIlce
+        let pharmacyPhone = data[index].eczaneTelefon
         //let pharmacy = data[index]
-        return Pharmacy(eczane_adi: pharmacyTitle, eczane_ilce: pharmacyCity, eczane_adres: pharmacyAddress, eczane_telefon: pharmacyPhone)
+        return Pharmacy(eczaneAdi: pharmacyTitle, eczaneIlce: pharmacyCity, eczaneAdres: pharmacyAddress, eczaneTelefon: pharmacyPhone)
         //return PharmacyViewModel(pharmacy)
     }
 }
@@ -42,18 +42,18 @@ extension PharmacyViewModel{
     }
     
     var title: String {
-        return self.pharmacy.eczane_adi
+        return self.pharmacy.eczaneAdi
     }
     
     var address: String {
-        return self.pharmacy.eczane_adres
+        return self.pharmacy.eczaneAdres
     }
     
     var city: String {
-        return self.pharmacy.eczane_ilce
+        return self.pharmacy.eczaneIlce
     }
     
     var phone: String {
-        return self.pharmacy.eczane_telefon
+        return self.pharmacy.eczaneTelefon
     }
 }
