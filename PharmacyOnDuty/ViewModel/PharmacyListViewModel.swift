@@ -26,9 +26,7 @@ extension PharmacyListViewModel{
         let pharmacyAddress = data[index].eczaneAdres
         let pharmacyCity = data[index].eczaneIlce
         let pharmacyPhone = data[index].eczaneTelefon
-        //let pharmacy = data[index]
         return Pharmacy(eczaneAdi: pharmacyTitle, eczaneIlce: pharmacyCity, eczaneAdres: pharmacyAddress, eczaneTelefon: pharmacyPhone)
-        //return PharmacyViewModel(pharmacy)
     }
 }
 

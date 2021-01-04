@@ -11,7 +11,6 @@ class ViewController: UIViewController {
     
     private var pharmacyListViewModel: PharmacyListViewModel!
     var pharmacyViewModel: PharmacyViewModel!
-    @IBOutlet weak var cityTextField: UITextField!
     private let webService = WebService()
     @IBOutlet weak var tableView: UITableView!{
         didSet{
@@ -22,23 +21,23 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUp(city: webService.city)
-        
+        let search = UISearchController(searchResultsController: nil)
+        search.searchResultsUpdater = self
+        search.obscuresBackgroundDuringPresentation = false
+        search.searchBar.placeholder = "Type something here to search"
+        navigationItem.hidesSearchBarWhenScrolling = true
+        navigationItem.searchController = search
+        setUp(city: "")
     }
     
     @IBAction func phoneLabelClicked(_ sender: Any) {
         if let url = NSURL(string: "tel://\(pharmacyViewModel.phone)"), UIApplication.shared.canOpenURL(url as URL) {
-            
             UIApplication.shared.open(url as URL)
         }
     }
-    @IBAction func editText(_ sender: Any) {
-        webService.city = cityTextField.text!
-        setUp(city: webService.city)
-    }
     
     private func setUp(city: String) {
-    webService.city = city
+    webService.city = (city)
     webService.getPharmacies(with: URL.urlForallPharmacyOnDuty()) { data in
             if let data = data {
                 self.pharmacyListViewModel = PharmacyListViewModel(data: data)
@@ -65,9 +64,16 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PharmacyTableViewCell", for: indexPath) as? PharmacyTableViewCell else {
                 fatalError("PharmacyTableViewCell not found!")
         }
-    
         pharmacyViewModel = PharmacyViewModel(self.pharmacyListViewModel.pharmacyAtIndex(indexPath.row))
         cell.configure(for: pharmacyViewModel)
         return cell
+    }
+}
+
+extension ViewController: UISearchResultsUpdating {
+
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        setUp(city: text)
     }
 }
