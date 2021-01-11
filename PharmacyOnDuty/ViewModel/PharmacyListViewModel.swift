@@ -7,34 +7,43 @@
 
 import Foundation
 
-struct PharmacyListViewModel {
-    let data: [Pharmacy]
-}
-
-extension PharmacyListViewModel{
+class PharmacyListViewModel {
+    private var pharmacies: [Pharmacy] = []
+    var filteredPharmacies: [Pharmacy] {
+        get {
+            if searchQuery.isEmpty {
+                return pharmacies
+            } else {
+                return pharmacies.filter { ($0.eczaneIlce == searchQuery) || ($0.eczaneAdres.lowercased().contains(searchQuery.lowercased()))}
+            }
+        }
+    }
+    var searchQuery: String = ""
     
     var numberOfSections: Int {
         return 1
     }
     
     func numberOfRowsInSection(_ section: Int) -> Int {
-        return self.data.count
+        return self.filteredPharmacies.count
     }
     
     func pharmacyAtIndex(_ index: Int) -> Pharmacy {
-        let pharmacyTitle = data[index].eczaneAdi
-        let pharmacyAddress = data[index].eczaneAdres
-        let pharmacyCity = data[index].eczaneIlce
-        let pharmacyPhone = data[index].eczaneTelefon
+        let pharmacyTitle = filteredPharmacies[index].eczaneAdi
+        let pharmacyAddress = filteredPharmacies[index].eczaneAdres
+        let pharmacyCity = filteredPharmacies[index].eczaneIlce
+        let pharmacyPhone = filteredPharmacies[index].eczaneTelefon
         return Pharmacy(eczaneAdi: pharmacyTitle, eczaneIlce: pharmacyCity, eczaneAdres: pharmacyAddress, eczaneTelefon: pharmacyPhone)
+    }
+    
+    func loadData(pharmacies: [Pharmacy]){
+        self.pharmacies = pharmacies
     }
 }
 
-struct PharmacyViewModel {
+class PharmacyViewModel {
     private let pharmacy: Pharmacy
-}
-
-extension PharmacyViewModel{
+    
     init(_ pharmacy: Pharmacy) {
         self.pharmacy = pharmacy
     }

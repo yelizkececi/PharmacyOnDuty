@@ -24,7 +24,7 @@
             </objects>
             <point key="canvasLocation" x="-1616" y="102"/>
         </scene>
-        <!--Nobetci Eczane-->
+        <!--Nöbetçi Eczane-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PharmacyOnDuty" customModuleProvider="target" sceneMemberID="viewController">
@@ -43,7 +43,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="85"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7bV-w6-bQZ">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7bV-w6-bQZ">
                                                     <rect key="frame" x="10" y="10" width="394" height="65"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TW0-EJ-Iti">
@@ -99,7 +99,7 @@
                                                                         <color key="titleColor" systemColor="labelColor"/>
                                                                     </state>
                                                                     <connections>
-                                                                        <action selector="phoneLabelClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uNt-oO-eDN"/>
+                                                                        <action selector="phoneLabelClicked:" destination="Ao1-Vd-av0" eventType="touchUpInside" id="GId-j0-wIH"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -135,7 +135,7 @@
                             <constraint firstItem="Ogt-Ix-OsW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="txn-cL-FoP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Nobetci Eczane" id="gj5-ry-rat"/>
+                    <navigationItem key="navigationItem" title="Nöbetçi Eczane" id="gj5-ry-rat"/>
                     <connections>
                         <outlet property="tableView" destination="Ogt-Ix-OsW" id="yrg-ho-TeH"/>
                     </connections>

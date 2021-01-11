@@ -112,7 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				21E55023259FA71F003D2C76 /* Model */,
-				21E55022259FA719003D2C76 /* View */,
 				21E55021259FA711003D2C76 /* ViewModel */,
 				21E55020259FA706003D2C76 /* Service */,
 				21E5501F259FA6F9003D2C76 /* Helpers */,
@@ -193,13 +192,6 @@
 				21E55040259FBC43003D2C76 /* PharmacyListViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		21E55022259FA719003D2C76 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		21E55023259FA71F003D2C76 /* Model */ = {

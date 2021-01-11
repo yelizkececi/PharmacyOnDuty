@@ -9,9 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private var pharmacyListViewModel: PharmacyListViewModel!
-    var pharmacyViewModel: PharmacyViewModel!
-    private let webService = WebService()
+    private var pharmacyListViewModel: PharmacyListViewModel = PharmacyListViewModel()
+
     @IBOutlet weak var tableView: UITableView!{
         didSet{
             tableView.delegate = self
@@ -24,23 +23,16 @@ class ViewController: UIViewController {
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self
         search.obscuresBackgroundDuringPresentation = false
-        search.searchBar.placeholder = "Type something here to search"
+        search.searchBar.placeholder = "Aramak istediğiniz şehri giriniz"
         navigationItem.hidesSearchBarWhenScrolling = true
         navigationItem.searchController = search
-        setUp(city: "")
+        loadPharmacies()
     }
-    
-    @IBAction func phoneLabelClicked(_ sender: Any) {
-        if let url = NSURL(string: "tel://\(pharmacyViewModel.phone)"), UIApplication.shared.canOpenURL(url as URL) {
-            UIApplication.shared.open(url as URL)
-        }
-    }
-    
-    private func setUp(city: String) {
-    webService.city = (city)
-    webService.getPharmacies(with: URL.urlForallPharmacyOnDuty()) { data in
+
+    private func loadPharmacies() {
+        WebService.shared.getPharmacies {  data in
             if let data = data {
-                self.pharmacyListViewModel = PharmacyListViewModel(data: data)
+                self.pharmacyListViewModel.loadData(pharmacies: data)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -49,14 +41,9 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource{
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-          return self.pharmacyListViewModel == nil ? 0 : self.pharmacyListViewModel.numberOfSections
-    }
+extension ViewController: UITableViewDelegate, UITableViewDataSource , UISearchResultsUpdating{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return self.pharmacyListViewModel == nil ? 0 : self.pharmacyListViewModel.numberOfSections
        return self.pharmacyListViewModel.numberOfRowsInSection(section)
     }
 
@@ -64,16 +51,16 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PharmacyTableViewCell", for: indexPath) as? PharmacyTableViewCell else {
                 fatalError("PharmacyTableViewCell not found!")
         }
-        pharmacyViewModel = PharmacyViewModel(self.pharmacyListViewModel.pharmacyAtIndex(indexPath.row))
+       let pharmacyViewModel = PharmacyViewModel(self.pharmacyListViewModel.pharmacyAtIndex(indexPath.row))
         cell.configure(for: pharmacyViewModel)
         return cell
     }
-}
-
-extension ViewController: UISearchResultsUpdating {
-
+    
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
-        setUp(city: text)
+        pharmacyListViewModel.searchQuery = text
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }

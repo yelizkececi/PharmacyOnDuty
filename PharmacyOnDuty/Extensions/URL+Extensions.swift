@@ -9,9 +9,7 @@ import Foundation
 import UIKit
 
 extension URL {
-    
     static func urlForallPharmacyOnDuty() -> URL {
         return URL(string: Constants.URLs.allPharmacyOnDuty)!
     }
-    
 }
